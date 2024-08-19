@@ -19,6 +19,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -27,6 +28,7 @@ class StaffResource extends Resource
 {
     protected static ?string $model = Staff::class;
     protected static ?string $navigationLabel = 'Personal';
+    protected static ?string $modelLabel = 'Personal';
     protected static ?string $navigationGroup = 'Administración de Personal';
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
@@ -34,7 +36,6 @@ class StaffResource extends Resource
     {
         return $form
             ->schema([
-                //
                 Section::make('Sección personal')
                     ->description('Desde aquí podrás seleccionar y digitar la información requrida para crear el personal')
                     ->schema([
@@ -43,7 +44,7 @@ class StaffResource extends Resource
                             ->relationship(name: 'department', titleAttribute: 'name')
                             ->required(),
                         TextInput::make('name')
-                            ->label('Nombre')
+                            ->label('Nombre y Apellidos')
                             ->required()
                             ->maxLength(200),
                         TextInput::make('address')
@@ -117,10 +118,9 @@ class StaffResource extends Resource
     {
         return $table
             ->columns([
-                //
                 TextColumn::make('id'),
                 TextColumn::make('name')
-                    ->label('Nombre')
+                    ->label('Nombre y Apellidos')
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
@@ -169,9 +169,13 @@ class StaffResource extends Resource
                     ->toggleable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('Departamento')
+                    ->relationship('department', 'name')
+                    ->searchable()
+                    ->preload(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

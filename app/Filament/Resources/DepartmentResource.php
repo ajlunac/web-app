@@ -19,6 +19,7 @@ class DepartmentResource extends Resource
 {
     protected static ?string $model = Department::class;
     protected static ?string $navigationLabel = 'Departamentos';
+    protected static ?string $modelLabel = 'Departamentos';
     protected static ?string $navigationGroup = 'Administración del sistema';
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
     protected static ?int $navigationSort = 3;

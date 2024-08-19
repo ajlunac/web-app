@@ -20,6 +20,7 @@ class StateResource extends Resource
 {
     protected static ?string $model = State::class;
     protected static ?string $navigationLabel = 'Estados';
+    protected static ?string $modelLabel = 'Estados';
     protected static ?string $navigationGroup = 'Administración del sistema';
     protected static ?string $navigationIcon = 'heroicon-o-flag';
 

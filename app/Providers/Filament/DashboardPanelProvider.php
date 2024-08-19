@@ -52,6 +52,9 @@ class DashboardPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->profile()
+            ->brandLogo(asset('images/Logo.png'))
+            ->brandLogoHeight('4rem')
+            ->favicon(asset('images/Logo.png'))
             ->authMiddleware([
                 Authenticate::class,
             ]);
