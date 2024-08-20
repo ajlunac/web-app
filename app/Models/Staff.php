@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Staff extends Model
 {
@@ -25,19 +27,19 @@ class Staff extends Model
 
     ];
 
-    public function country(){
+    public function country(): BelongsTo{
         return $this->belongsTo(Country::class);
     }
 
-    public function state(){
+    public function state(): BelongsTo{
         return $this->belongsTo(State::class);
     }
 
-    public function city(){
+    public function city(): BelongsTo{
         return $this->belongsTo(City::class);
     }
 
-    public function department(){
+    public function department(): BelongsTo{
         return $this->belongsTo(Department::class);
     }
 

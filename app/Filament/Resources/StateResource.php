@@ -28,15 +28,14 @@ class StateResource extends Resource
     {
         return $form
             ->schema([
-                //
                 Select::make('country_id')
                     ->relationship(name: 'country', titleAttribute: 'name'),
                 TextInput::make('state_code')
-                ->required()
-                ->maxLength(3),
+                    ->required()
+                    ->maxLength(3),
                 TextInput::make('name')
-                ->required()
-                ->maxLength(200),
+                    ->required()
+                    ->maxLength(200),
             ]);
     }
 
@@ -44,7 +43,6 @@ class StateResource extends Resource
     {
         return $table
             ->columns([
-                //
                 TextColumn::make('id')
                     ->sortable(),
                 TextColumn::make('name')

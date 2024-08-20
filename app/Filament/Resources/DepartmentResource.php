@@ -28,7 +28,6 @@ class DepartmentResource extends Resource
     {
         return $form
             ->schema([
-                //
                 TextInput::make('name')
                     ->required()
                     ->maxLength(200),
@@ -47,7 +46,6 @@ class DepartmentResource extends Resource
     {
         return $table
             ->columns([
-                //
                 TextColumn::make('id')
                     ->sortable(),
                 TextColumn::make('name')

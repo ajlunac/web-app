@@ -29,7 +29,6 @@ class CityResource extends Resource
     {
         return $form
             ->schema([
-                //
                 Select::make('state_id')
                     ->relationship(name: 'state', titleAttribute: 'name'),
                     TextInput::make('area_code')
@@ -46,7 +45,6 @@ class CityResource extends Resource
     {
         return $table
             ->columns([
-                //
                 TextColumn::make('id')
                     ->sortable(),
                 TextColumn::make('name')
