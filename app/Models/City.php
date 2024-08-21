@@ -13,12 +13,16 @@ class City extends Model
 
     protected $fillable = ['state_id', 'area_code', 'name'];
 
-    public function state(): BelongsTo{
+    public function state(): BelongsTo {
         return $this->belongsTo(State::class);
     }
 
-    public function staff(): HasMany{
-        return $this->hasMany(Staff::class);
+    public function employees(): HasMany {
+        return $this->hasMany(Employee::class);
+    }
+
+    public function servers(): HasMany {
+        return $this->hasMany(Server::class);
     }
 
 }

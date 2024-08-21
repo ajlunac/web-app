@@ -16,12 +16,17 @@ class State extends Model
     public function country(): BelongsTo{
         return $this->belongsTo(Country::class);
     }
-
-    public function staff(): HasMany{
-        return $this->hasMany(Staff::class);
-    }
-
+    
     public function cities(): HasMany{
         return $this->hasMany(City::class);
     }
+
+    public function employees(): HasMany{
+        return $this->hasMany(Employee::class);
+    }
+
+    public function servers(): HasMany {
+        return $this->hasMany(Server::class);
+    }
+
 }

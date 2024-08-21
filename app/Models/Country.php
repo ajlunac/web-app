@@ -12,12 +12,15 @@ class Country extends Model
 
     protected $fillable = ['country_code', 'area_code', 'name'];
 
-    public function states(): HasMany{
+    public function states(): HasMany {
         return $this->hasMany(State::class);
     }
 
-    public function staff(): HasMany{
-        return $this->hasMany(Staff::class);
+    public function employees(): HasMany {
+        return $this->hasMany(Employee::class);
     }
 
+    public function servers(): HasMany {
+        return $this->hasMany(Server::class);
+    }
 }

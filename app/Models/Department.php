@@ -12,8 +12,12 @@ class Department extends Model
 
     protected $fillable = ['name', 'email', 'extension_phone'];
 
-    public function staff(): HasMany{
-        return $this->hasMany(Staff::class);
+    public function employees(): HasMany{
+        return $this->hasMany(Employee::class);
+    }
+
+    public function servers(): HasMany {
+        return $this->hasMany(Server::class);
     }
 
 }
