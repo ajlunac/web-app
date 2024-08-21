@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServerResource\Pages;
 use App\Filament\Resources\ServerResource\RelationManagers;
+use App\Filament\Resources\ServerResource\RelationManagers\UrlsRelationManager;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Server;
@@ -161,19 +162,23 @@ class ServerResource extends Resource
                 TextColumn::make('department.name')
                     ->label('Departamento')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('name')
                     ->label('Nombre')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('operating_system')
                     ->label('Sistema Operativo')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('ip')
                     ->label('IP')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('brand')
                     ->label('Marca')
                     ->sortable()
@@ -187,19 +192,23 @@ class ServerResource extends Resource
                 TextColumn::make('serial_number')
                     ->label('Número de serie')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('ram_capacity')
                     ->label('RAM')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('processor')
                     ->label('Procesador')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('stora_capacity')
                     ->label('Almacenamiento')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('type')
                     ->label('Tipo')
                     ->sortable()
@@ -245,7 +254,7 @@ class ServerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            UrlsRelationManager::class,
         ];
     }
 
