@@ -234,10 +234,12 @@ class ServerResource extends Resource
                 SelectFilter::make('Departamentos')
                     ->relationship('department', 'name')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->indicator('Departamentos'),
                 SelectFilter::make('Ciudades')
                     ->relationship('city', 'name')
                     ->searchable()
+                    ->indicator('Ciudades')
                     ->preload(),
             ])
             ->actions([
