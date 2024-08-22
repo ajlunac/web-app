@@ -52,6 +52,7 @@ class DashboardPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->profile()
+            ->sidebarCollapsibleOnDesktop()
             ->brandLogo(asset('images/Logo.png'))
             ->brandLogoHeight('4rem')
             ->favicon(asset('images/Logo.png'))
