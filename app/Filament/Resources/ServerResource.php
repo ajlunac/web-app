@@ -26,6 +26,10 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class ServerResource extends Resource
 {
@@ -244,11 +248,23 @@ class ServerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('createPDF')
+                    ->label('PDF')
+                    ->color('danger')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->requiresConfirmation()
+                    // ->url(fn(Server $record) => route('server.pdf.download', $record))
+                    ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()->exports([
+                        ExcelExport::make('Tabla')->fromTable()
+                            ->askForFilename('Nombre de archivo')
+                            ->askForWriterType(),
+                    ]),
                 ]),
             ]);
     }
