@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DownloadPdfController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,3 +9,4 @@ Route::get('/', function () {
     return redirect('/dashboard');
 });
 
+Route::get('/{record}/pdf}/ServerRecords', [PdfController::class, 'ServerRecords'])->name('pdf.server');

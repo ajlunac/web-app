@@ -253,7 +253,7 @@ class ServerResource extends Resource
                     ->color('danger')
                     ->icon('heroicon-o-document-arrow-down')
                     ->requiresConfirmation()
-                    // ->url(fn(Server $record) => route('server.pdf.download', $record))
+                    ->url(fn(Server $record) => route('pdf.server', $record))
                     ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make(),
             ])
