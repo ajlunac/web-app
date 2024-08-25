@@ -23,4 +23,8 @@ class Country extends Model
     public function servers(): HasMany {
         return $this->hasMany(Server::class);
     }
+
+    public function tests(): HasMany {
+        return $this->hasMany(Test::class);
+    }
 }

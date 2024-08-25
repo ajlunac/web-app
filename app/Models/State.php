@@ -29,4 +29,8 @@ class State extends Model
         return $this->hasMany(Server::class);
     }
 
+    public function tests(): HasMany {
+        return $this->hasMany(Test::class);
+    }
+
 }
