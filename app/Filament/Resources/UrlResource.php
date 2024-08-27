@@ -6,7 +6,7 @@ use App\Filament\Resources\UrlResource\Pages;
 use App\Filament\Resources\UrlResource\RelationManagers;
 use App\Models\Url;
 use Filament\Forms;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -27,6 +27,7 @@ class UrlResource extends Resource
     protected static ?string $modelLabel = 'Urls';
     protected static ?string $navigationIcon = 'heroicon-o-globe-americas';
     protected static ?string $navigationGroup = 'Administración de Servidores';
+    protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
     {
@@ -41,14 +42,14 @@ class UrlResource extends Resource
                     ->url()
                     ->suffixIcon('heroicon-m-globe-alt')
                     ->unique(ignoreRecord: true)
-                    ->maxLength(255),
+                    ->maxLength(150),
                 TextInput::make('url_contingency')
                     ->label('Url Contingencia')
                     ->url()
                     ->suffixIcon('heroicon-m-globe-alt')
                     ->unique(ignoreRecord: true)
-                    ->maxLength(255),
-                DateTimePicker::make('date_deployment')
+                    ->maxLength(150),
+                DatePicker::make('date_deployment')
                     ->label('Fecha de despliegue')
                     ->required(),
                 Toggle::make('active')
@@ -118,6 +119,7 @@ class UrlResource extends Resource
         return [
             'index' => Pages\ListUrls::route('/'),
             'create' => Pages\CreateUrl::route('/create'),
+            'view' => Pages\ViewUrl::route('/{record}'),
             'edit' => Pages\EditUrl::route('/{record}/edit'),
         ];
     }

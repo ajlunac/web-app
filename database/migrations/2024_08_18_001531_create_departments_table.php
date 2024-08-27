@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->char('extension_phone');
+            $table->string('name', 100);
+            $table->string('email', 100);
+            $table->string('extension_phone', 10);
             $table->timestamps();
         });
     }

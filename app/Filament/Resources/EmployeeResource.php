@@ -31,6 +31,7 @@ class EmployeeResource extends Resource
     protected static ?string $modelLabel = 'Empleados';
     protected static ?string $navigationGroup = 'Administración de Personal';
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -46,16 +47,16 @@ class EmployeeResource extends Resource
                         TextInput::make('name')
                             ->label('Nombre y Apellidos')
                             ->required()
-                            ->maxLength(200),
+                            ->maxLength(100),
                         TextInput::make('address')
                             ->label('Dirección')
                             ->required()
-                            ->maxLength(200),
+                            ->maxLength(100),
                         TextInput::make('phone_number')
                             ->label('Número de Celular')
                             ->required()
                             ->numeric()
-                            ->maxLength(12),
+                            ->maxLength(10),
                         TextInput::make('email')
                             ->label('Email')
                             ->required()
@@ -118,7 +119,8 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
+                TextColumn::make('id')
+                    ->label('ID'),
                 TextColumn::make('name')
                     ->label('Nombre y Apellidos')
                     ->sortable()
@@ -197,6 +199,7 @@ class EmployeeResource extends Resource
         return [
             'index' => Pages\ListEmployees::route('/'),
             'create' => Pages\CreateEmployee::route('/create'),
+            'view' => Pages\ViewEmployee::route('/{record}'),
             'edit' => Pages\EditEmployee::route('/{record}/edit'),
         ];
     }

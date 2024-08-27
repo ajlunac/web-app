@@ -29,13 +29,17 @@ class StateResource extends Resource
         return $form
             ->schema([
                 Select::make('country_id')
+                    ->required()
+                    ->label('País')
                     ->relationship(name: 'country', titleAttribute: 'name'),
                 TextInput::make('state_code')
                     ->required()
+                    ->label('Código de área / Siglas')
                     ->maxLength(3),
                 TextInput::make('name')
                     ->required()
-                    ->maxLength(200),
+                    ->label('Nombre')
+                    ->maxLength(100),
             ]);
     }
 
@@ -44,24 +48,30 @@ class StateResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')
+                    ->label('ID')
                     ->sortable(),
                 TextColumn::make('name')
+                    ->label('Nombre')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('state_code')
                     ->sortable()
+                    ->label('Cód área / Siglas')
                     ->searchable(),
                 TextColumn::make('country.name')
                     ->sortable()
+                    ->label('País')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->sortable()
+                    ->label('Fecha de creación')
                     ->dateTime(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -83,6 +93,7 @@ class StateResource extends Resource
         return [
             'index' => Pages\ListStates::route('/'),
             'create' => Pages\CreateState::route('/create'),
+            'view' => Pages\ViewState::route('/{record}'),
             'edit' => Pages\EditState::route('/{record}/edit'),
         ];
     }

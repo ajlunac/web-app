@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('state_id')->constrained()->cascadeOnDelete();
             $table->foreignId('city_id')->constrained()->cascadeOnDelete();
             $table->foreignId('department_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
+            $table->string('name', 100);
             $table->text('comment');
             $table->enum('type',['virtual','physical'])->default('virtual');
             $table->timestamp('date_installation');

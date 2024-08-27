@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('urls', function (Blueprint $table) {
             $table->id();
             $table->foreignId('server_id')->constrained()->cascadeOnDelete();
-            $table->string('url_principal');
-            $table->string('url_contingency');
+            $table->string('url_principal', 150);
+            $table->string('url_contingency', 150);
             $table->timestamp('date_deployment');
             $table->boolean('active')->default(true);
             $table->timestamps();

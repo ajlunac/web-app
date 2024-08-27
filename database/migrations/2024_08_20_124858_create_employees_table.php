@@ -17,11 +17,11 @@ return new class extends Migration
             $table->foreignId('state_id')->constrained()->cascadeOnDelete();
             $table->foreignId('city_id')->constrained()->cascadeOnDelete();
             $table->foreignId('department_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->string('address');
-            $table->string('phone_number');
-            $table->string('email');
-            $table->char('zip_code');
+            $table->string('name', 100);
+            $table->string('address', 100);
+            $table->string('phone_number', 10);
+            $table->string('email', 100);
+            $table->string('zip_code', 10);
             $table->date('birth_date');
             $table->boolean('active')->default(true);
             $table->timestamps();

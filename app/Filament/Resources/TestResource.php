@@ -29,6 +29,7 @@ class TestResource extends Resource
     protected static ?string $modelLabel = 'Pruebas';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Pruebas';
+    protected static ?int $navigationSort = 7;
 
     public static function form(Form $form): Form
     {
@@ -45,7 +46,7 @@ class TestResource extends Resource
                         TextInput::make('name')
                             ->label('Nombre')
                             ->required()
-                            ->maxLength(255)
+                            ->maxLength(100)
                             ->unique(ignoreRecord: true),
                         Select::make('type')
                             ->label('Tipo')
@@ -62,6 +63,7 @@ class TestResource extends Resource
                             ->required(),
                         Textarea::make('comment')
                             ->required()
+                            ->label('Comentario')
                             ->maxLength(65535)
                             ->columnSpanFull(),
                     ])->columns(3),
@@ -111,26 +113,41 @@ class TestResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('country.name')
+                    ->label('País')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('state.name')
+                    ->label('Estado')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('city.name')
+                    ->label('Ciudad')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('department.name')
+                    ->label('Departamento')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('type'),
+                Tables\Columns\SelectColumn::make('type')
+                    ->label('Tipo')
+                    ->options([
+                        'virtual' => 'Virtual',
+                        'physical' => 'Físico',
+                    ])
+                    ->selectablePlaceholder(false)
+                    ->disabled(),
                 Tables\Columns\TextColumn::make('date_installation')
+                    ->label('Fecha de Instalación')
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('active')
+                    ->label('Estado')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha de Creación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

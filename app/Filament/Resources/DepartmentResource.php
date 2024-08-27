@@ -30,13 +30,15 @@ class DepartmentResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->required()
-                    ->maxLength(200),
+                    ->label('Nombre')
+                    ->maxLength(100),
                 TextInput::make('email')
                     ->required()
                     ->email()
-                    ->maxLength(200),
+                    ->maxLength(100),
                 TextInput::make('extension_phone')
                     ->required()
+                    ->label('Extensión')
                     ->numeric()
                     ->maxLength(10),
             ]);
@@ -47,18 +49,23 @@ class DepartmentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')
+                    ->label('ID')
                     ->sortable(),
                 TextColumn::make('name')
                     ->sortable()
+                    ->label('Nombre')
                     ->searchable(),
                 TextColumn::make('email')
                     ->sortable()
+                    ->label('Email')
                     ->searchable(),
                 TextColumn::make('extension_phone')
                     ->sortable()
+                    ->label('Extensión')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->sortable()
+                    ->label('Fecha de creación')
                     ->searchable(),
 
             ])
@@ -66,6 +73,7 @@ class DepartmentResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -87,6 +95,7 @@ class DepartmentResource extends Resource
         return [
             'index' => Pages\ListDepartments::route('/'),
             'create' => Pages\CreateDepartment::route('/create'),
+            'view' => Pages\ViewDepartment::route('/{record}'),
             'edit' => Pages\EditDepartment::route('/{record}/edit'),
         ];
     }

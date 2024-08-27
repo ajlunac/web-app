@@ -11,7 +11,6 @@ use App\Models\Server;
 use App\Models\State;
 use DeepCopy\Filter\Filter;
 use Filament\Forms;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -29,7 +28,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\SelectColumn;
 
 class ServerResource extends Resource
 {
@@ -38,6 +38,7 @@ class ServerResource extends Resource
     protected static ?string $modelLabel = 'Servidores';
     protected static ?string $navigationIcon = 'heroicon-o-server-stack';
     protected static ?string $navigationGroup = 'Administración de Servidores';
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -53,43 +54,43 @@ class ServerResource extends Resource
                         TextInput::make('name')
                             ->label('Nombre')
                             ->required()
-                            ->maxLength(255)
+                            ->maxLength(100)
                             ->unique(ignoreRecord: true),
                         TextInput::make('operating_system')
                             ->label('Sistema operativo')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(100),
                         TextInput::make('ip')
                             ->label('IP')
                             ->required()
-                            ->maxLength(255)
+                            ->maxLength(20)
                             ->unique(ignoreRecord: true),
                         TextInput::make('brand')
                             ->label('Marca')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(100),
                         TextInput::make('name_plate')
                             ->label('Placa / Activo')
                             ->required()
-                            ->maxLength(255)
+                            ->maxLength(50)
                             ->unique(ignoreRecord: true),
                         TextInput::make('serial_number')
                             ->label('Número de serie')
                             ->required()
-                            ->maxLength(255)
+                            ->maxLength(50)
                             ->unique(ignoreRecord: true),
                         TextInput::make('ram_capacity')
                             ->label('Capacidad de RAM')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(20),
                         TextInput::make('processor')
                             ->label('Procesador')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(100),
                         TextInput::make('stora_capacity')
                              ->label('Almacenamiento')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(50),
                         Select::make('type')
                             ->label('Tipo')
                             ->options([
@@ -97,7 +98,7 @@ class ServerResource extends Resource
                                 'physical' => 'Físico',
                             ])
                             ->required(),
-                        DateTimePicker::make('date_installation')
+                        DatePicker::make('date_installation')
                             ->label('Fecha de entrega')
                             ->required(),
                         Toggle::make('active')
@@ -213,10 +214,16 @@ class ServerResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
-                TextColumn::make('type')
+                SelectColumn::make('type')
                     ->label('Tipo')
+                    ->options([
+                        'virtual' => 'Virtual',
+                        'physical' => 'Físico',
+                    ])
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->selectablePlaceholder(false)
+                    ->disabled(),
                 TextColumn::make('date_installation')
                     ->label('Fecha de entrega')
                     ->dateTime()
@@ -281,6 +288,7 @@ class ServerResource extends Resource
         return [
             'index' => Pages\ListServers::route('/'),
             'create' => Pages\CreateServer::route('/create'),
+            'view' => Pages\ViewServer::route('/{record}'),
             'edit' => Pages\EditServer::route('/{record}/edit'),
         ];
     }
