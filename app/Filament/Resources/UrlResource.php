@@ -63,15 +63,17 @@ class UrlResource extends Resource
             ->columns([
                 TextColumn::make('server.name')
                     ->label('Nombre de Servidor')
-                    ->numeric()
+                    ->copyable()
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('url_principal')
                     ->label('Url principal')
+                    ->copyable()
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('url_contingency')
                     ->label('Url contingencia')
+                    ->copyable()
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('date_deployment')
@@ -89,7 +91,7 @@ class UrlResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ])->defaultSort('server.name')
             ->filters([
                 SelectFilter::make('Servidor')
                     ->relationship('server', 'name')

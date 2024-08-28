@@ -68,7 +68,7 @@ class CityResource extends Resource
                     ->label('Fecha de creación')
                     ->sortable()
                     ->dateTime(),
-            ])
+            ])->defaultSort('id')
             ->filters([
                 //
             ])

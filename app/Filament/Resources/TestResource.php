@@ -16,6 +16,8 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -114,22 +116,19 @@ class TestResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('country.name')
                     ->label('País')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('state.name')
                     ->label('Estado')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('city.name')
                     ->label('Ciudad')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('department.name')
                     ->label('Departamento')
-                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nombre')
+                    ->copyable()
                     ->searchable(),
                 Tables\Columns\SelectColumn::make('type')
                     ->label('Tipo')
@@ -155,7 +154,7 @@ class TestResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ])->defaultSort('name')
             ->filters([
                 //
             ])

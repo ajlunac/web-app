@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\DepartmentResource\Pages;
 use App\Filament\Resources\DepartmentResource\RelationManagers;
 use App\Models\Department;
+use App\Models\Employee;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -55,6 +56,8 @@ class DepartmentResource extends Resource
                     ->sortable()
                     ->label('Nombre')
                     ->searchable(),
+                TextColumn::make('employees_count')->counts('employees')
+                    ->label('Empleados por departamentos'),
                 TextColumn::make('email')
                     ->sortable()
                     ->label('Email')
@@ -68,7 +71,7 @@ class DepartmentResource extends Resource
                     ->label('Fecha de creación')
                     ->searchable(),
 
-            ])
+            ])->defaultSort('id')
             ->filters([
                 //
             ])

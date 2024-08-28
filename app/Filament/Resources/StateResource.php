@@ -66,7 +66,7 @@ class StateResource extends Resource
                     ->sortable()
                     ->label('Fecha de creación')
                     ->dateTime(),
-            ])
+            ])->defaultSort('id')
             ->filters([
                 //
             ])

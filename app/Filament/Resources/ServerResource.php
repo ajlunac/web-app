@@ -151,26 +151,23 @@ class ServerResource extends Resource
             ->columns([
                 TextColumn::make('country.name')
                     ->label('País')
-                    ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('state.name')
                     ->label('Estado')
-                    ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('city.name')
                     ->label('Ciudad')
-                    ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('department.name')
                     ->label('Departamento')
-                    ->numeric()
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('name')
                     ->label('Nombre')
+                    ->copyable()
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
@@ -181,6 +178,7 @@ class ServerResource extends Resource
                     ->toggleable(),
                 TextColumn::make('ip')
                     ->label('IP')
+                    ->copyable()
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
@@ -240,7 +238,7 @@ class ServerResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ])->defaultSort('name')
             ->filters([
                 SelectFilter::make('Departamentos')
                     ->relationship('department', 'name')

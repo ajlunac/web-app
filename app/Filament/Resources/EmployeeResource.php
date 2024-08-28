@@ -169,7 +169,7 @@ class EmployeeResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
-            ])
+            ])->defaultSort('id')
             ->filters([
                 SelectFilter::make('Departamento')
                     ->relationship('department', 'name')

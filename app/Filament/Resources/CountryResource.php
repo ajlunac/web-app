@@ -70,7 +70,7 @@ class CountryResource extends Resource
                     ->sortable()
                     ->dateTime(),
                 
-            ])
+            ])->defaultSort('id')
             ->filters([
                 //
             ])
