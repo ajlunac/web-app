@@ -39,6 +39,16 @@ class ServerResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-server-stack';
     protected static ?string $navigationGroup = 'Administración de Servidores';
     protected static ?int $navigationSort = 5;
+    
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() > 10 ? 'warning' : 'danger';
+    }
 
     public static function form(Form $form): Form
     {

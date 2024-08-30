@@ -18,8 +18,11 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -32,6 +35,16 @@ class TestResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Pruebas';
     protected static ?int $navigationSort = 7;
+    
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() > 10 ? 'warning' : 'danger';
+    }
 
     public static function form(Form $form): Form
     {
@@ -58,7 +71,7 @@ class TestResource extends Resource
                             ])
                             ->required(),
                         DateTimePicker::make('date_installation')
-                            ->label('Fecha de entrega')
+                            ->label('Fecha de Instalación')
                             ->required(),
                         Toggle::make('active')
                             ->label('Estado')
@@ -156,11 +169,27 @@ class TestResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])->defaultSort('name')
             ->filters([
-                //
+                SelectFilter::make('Departamentos')
+                    ->relationship('department', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->indicator('Departamentos'),
+                SelectFilter::make('Ciudades')
+                    ->relationship('city', 'name')
+                    ->searchable()
+                    ->indicator('Ciudades')
+                    ->preload(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->successNotification(
+                        Notification::make()
+                            ->success()
+                            ->title('Prueba eliminada.')
+                            ->body('La prueba se ha eliminado de manera correcta.')
+                    ),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

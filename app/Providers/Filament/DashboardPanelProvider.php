@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -31,6 +32,11 @@ class DashboardPanelProvider extends PanelProvider
             ->maxContentWidth(MaxWidth::Full)
             ->colors([
                 'primary' => Color::Amber,
+                // 'danger' => Color::Red,
+                // 'gray' => Color::Zinc,
+                // 'info' => Color::Blue,
+                // 'success' => Color::Green,
+                // 'warning' => Color::Amber,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -55,6 +61,13 @@ class DashboardPanelProvider extends PanelProvider
             ])
             ->profile()
             ->sidebarCollapsibleOnDesktop()
+            ->navigationGroups([
+                'Administración del sistema',
+                'Administración de Personal',
+                'Administración de Servidores',
+                'Pruebas',
+            ])
+            // ->registration()
             ->brandLogo(asset('images/Logo.png'))
             ->brandLogoHeight('4rem')
             ->favicon(asset('images/Logo.png'))

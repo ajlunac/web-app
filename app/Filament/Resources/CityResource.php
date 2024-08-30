@@ -21,10 +21,10 @@ class CityResource extends Resource
     protected static ?string $model = City::class;
     protected static ?string $navigationLabel = 'Ciudades';
     protected static ?string $modelLabel = 'Ciudades';
-    protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
     protected static ?string $navigationGroup = 'Administración del sistema';
     protected static ?int $navigationSort = 2;
-
+    
     public static function form(Form $form): Form
     {
         return $form

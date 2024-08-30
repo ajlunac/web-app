@@ -23,6 +23,7 @@ class CountryResource extends Resource
     protected static ?string $modelLabel = 'Paises';
     protected static ?string $navigationGroup = 'Administración del sistema';
     protected static ?string $navigationIcon = 'heroicon-o-map';
+    
     public static function form(Form $form): Form
     {
         return $form
