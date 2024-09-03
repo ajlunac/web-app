@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Widgets\EmployeeChart;
 use App\Filament\Widgets\StatsOverview;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -34,11 +35,6 @@ class DashboardPanelProvider extends PanelProvider
             ->maxContentWidth(MaxWidth::Full)
             ->colors([
                 'primary' => Color::Amber,
-                // 'danger' => Color::Red,
-                // 'gray' => Color::Zinc,
-                // 'info' => Color::Blue,
-                // 'success' => Color::Green,
-                // 'warning' => Color::Amber,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -75,6 +71,9 @@ class DashboardPanelProvider extends PanelProvider
             ->favicon(asset('images/Logo.png'))
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->plugins([
+                FilamentShieldPlugin::make()
             ]);
     }
 }

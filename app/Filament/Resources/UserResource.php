@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
@@ -63,6 +64,11 @@ class UserResource extends Resource
                     ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord )
                     ->minLength(8)
                     ->dehydrated(false),
+                Select::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable(),
             ]);
     }
 
